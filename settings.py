@@ -12,21 +12,28 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-DATABASE_ENGINE = 'mysql'
-DATABASE_NAME = 'myaccount_mybase'
-DATABASE_USER = 'myaccount'
-DATABASE_PASSWORD = 'mypassword'
-DATABASE_HOST = 'mysql.alwaysdata.com'
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'fat7y_dr_fatma',                      # Or path to database file if using sqlite3.
-        'USER': 'fat7y',                      # Not used with sqlite3.
-        'PASSWORD': 'LOL@lol1',                  # Not used with sqlite3.
-        'HOST': 'mysql2.alwaysdata.com',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': join(ROOT_PATH,'sqlite.db'),                      # Or path to database file if using sqlite3.
+            'USER': '',                      # Not used with sqlite3.
+            'PASSWORD': '',                  # Not used with sqlite3.
+            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'fat7y_dr_fatma',                      # Or path to database file if using sqlite3.
+            'USER': 'fat7y',                      # Not used with sqlite3.
+            'PASSWORD': 'LOL@lol1',                  # Not used with sqlite3.
+            'HOST': 'mysql2.alwaysdata.com',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -144,6 +151,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainapp',
+    'stdimage',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
