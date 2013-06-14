@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib import auth
 from django.db.models.query import QuerySet
 from settings import QUOTES_OWNERS_IMAGES, QUOTES_RELATED_IMAGES, MEMORIES_IMAGES
-from stdimage import StdImageField
+from wwwroot.stdimage import StdImageField
 
 
 # Create your models here.
