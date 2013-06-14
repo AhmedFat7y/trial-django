@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)http://themes.purelayers.com/contrast/category/portfolio/?type=1 -->
+<html>
+	<meta name="author" content="Pure Layers">
+	<meta name="keywords" content="Dr. Fatma, Tribute, Gift, Memory">
+	<meta name="robots" content="all">
+
+	<title>Dr. Fatma Memories</title>
+
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #505050; }
+</style>
+	<link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style.css">
+	<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/shortcodes.css">
+	
+	<!--[if IE 7]><link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style-IE7.css" /><![endif]-->
+	<!--[if IE 9]><link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style-IE9.css" /><![endif]-->
+	
+	<script type="text/javascript" async="" src="{{STATIC_URL}}scripts/ga.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-1.7.1.min.js"></script>
+	<style type="text/css"></style>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-ui-1.8.14.custom.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.nivo.slider.pack.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.prettyPhoto.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.tipsy.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/shortcodes.js"></script>
+	
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.easing.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/supersized.3.2.4.min.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/supersized.shutter.js"></script>
+	
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.inputs.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/swfobject.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/functions.js"></script>
+</head>
+
+<body class="archive category category-portfolio category-4 custom-background">
+
+<div class="container">
+	<!-- header start -->
+	<div class="header">
+		<!-- logo start -->
+				<div class="logo"><a href="#">Dr. Fatma</a></div>
+		<!-- logo end -->
+		
+		<div class="navigation" style="top: 197px; display: block; opacity: 1;">
+			<!-- menu start -->
+			<ul id="menu-main-menu" class="menu">
+				<li id="menu-item-4" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4">
+					<a href="/">Home</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- header end -->
+	
+			
+						
+		<!-- content start -->
+		<div class="content">
+			<div class="nav portfolio" style="height: 629px;">
+				<div class="navMask">
+					<ul class="navContent" style="right: 0px; top: 6.984662576687116px;">
+						<li class="paging"></li>
+            {% for memory in all_memories%}
+						<li class="item">
+							<h4>{{memory.situation}}</h4>
+							<p class="image"><a href="javascript:;">
+							<img src="{{memory.image.url}}" alt="{{memory.image.name}}" title="">							</a></p>
+							<p class="details">{{memory.situation}}</p>
+							<p class="more"><a href="javascript:alert("lol");">VIEW DETAILS</a></p>
+							</li>
+              {% endfor %}
+						<li class="paging"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- content end -->
+		
+				
+		<script type="text/javascript">
+			$(document).ready(function() {
+				//cool this, right?
+				setTimeout(function(){
+					$('.nav.portfolio .navMask ul.navContent').animate({right: '-200px'}, {queue:false, duration: 500});
+					$('.navigation, .footer').animate({opacity: '0.1'}, {queue:false, duration: 500});
+				}, 1000);
+				
+				$('.nav.portfolio .navMask ul.navContent, .navigation, .footer').hover(function() {
+					$('.nav.portfolio .navMask ul.navContent').animate({right: '0px'}, {queue:false, duration: 500});
+					$('.navigation, .footer').animate({opacity: '1'}, {queue:false, duration: 500});
+				},
+				function(){
+					$('.nav.portfolio .navMask ul.navContent').animate({right: '-200px'}, {queue:false, duration: 500});
+					$('.navigation, .footer').animate({opacity: '0.1'}, {queue:false, duration: 500});
+				});
+				
+				$('.nav.portfolio .navMask ul.navContent li p.image a').click(function() {
+					$('.loading').fadeIn();
+					var htmlUrl = '<img src="{{MEDIA_URL}}' + $(this).find('img').attr("alt") + '.jpg" alt="" class="background" />';
+					
+					$('#background').html(htmlUrl);
+					$('#background img').load(function() {
+						background_resize();
+						$(this).fadeIn();
+						$('.loading').fadeOut();
+					});
+				});
+				
+				//$('.nav.portfolio .navMask ul.navContent li p.image a:eq(0)').click();
+				//$('.loading').fadeOut();
+			});
+		</script>
+		
+
+	<!-- loading start -->
+<div class="loading" style="display: none;">
+	<img src="/static/imgs/loading.gif" alt="Loading">
+</div>
+<!-- loading end -->
+
+<!-- background start -->
+<div id="background"></div>
+<!-- background end -->	
+
+	<!-- footer start -->
+	<div class="footer" style="opacity: 1;">
+	{% comment %}
+				<ul class="social">
+			<li><a href="http://themes.purelayers.com/contrast/feed/rss/" class="icon-rss">RSS</a></li>												<li><a href="http://www.facebook.com/" class="icon-facebook">Facebook</a></li>						<li><a href="http://www.flickr.com/" class="icon-flickr">Flickr</a></li>																					<li><a href="http://www.twitter.com/" class="icon-twitter">Twitter</a></li>								</ul>
+				
+		<div class="copyright">
+						<p>Copyright © <a href="http://themes.purelayers.com/contrast">Contrast</a>. All Rights Reserved. Powered by <a href="http://www.themetoucan.com/">Wordpress Themes</a></p>
+					</div>
+	{% endcomment %}
+	</div>
+	<!-- footer end -->
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26906870-1']);
+  _gaq.push(['_setDomainName', 'purelayers.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<div id="supersized-loader"></div>
+<ul id="supersized"></ul>
+</body>
+</html>

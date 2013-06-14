@@ -1,0 +1,65 @@
+{# Display a post in one of these modes: 'full', 'home' or 'teaser' #}
+{% with comments_count=post.comments.count post_comments=post.comments.all last_comment=post.get_last_comment%}
+    <div class="post {{ as }}">
+        <h2 class="post-title">
+            <a href="{{ post.link }}">{{ post.title }}</a>
+        </h2>
+        <div class="post-metadata">
+            <span class="post-author">by {{ blog.owner.get_full_name }}</span>,
+            <span class="post-date">{{ post.pub_date|date:"D d M Y - g:i A" }}</span>
+            {% if not as == 'full' %}
+                <span class="post-comments">
+                    &nbsp;|&nbsp; {{ comments_count|default:'no'}} comment{{ comments_count|pluralize }}
+                    {% if las_comment %}
+                        , latest by {{ last_comment.author.get_full_name }} since {{ last_comment.pub_date|timesince }}
+                    {% endif %}
+                </span>
+            {% endif %}
+                <span class="post-tags">
+                     
+                    {% for tag in post.tags.all %}
+                            {% if forloop.first %}
+                                - Tagged
+                            {% endif %}
+                        <a href="{{ tag.link }}">{{ tag.name }}</a>
+                        {% if not forloop.last %}
+                            ,
+                        {% endif %}
+                    {% empty %}
+                            <span class="empty">No Tags</span>
+                    {% endfor %}
+                    {% if user.is_authenticated %}
+                        
+                        <div class="small-form" style="margin-left: 20px">
+                            <button type="submit" class="btn btn-mini">Edit Tags</button>
+                        </div>
+                    {% endif %}
+                </span>
+        </div>
+        {% if not as == 'teaser' %}
+            <div class="post-content">
+                <div class="about">Detail: </div>
+                {{ post.content|linebreaks }}
+            </div>
+        {% endif %}
+    </div>
+     
+    {% if as == 'full' %}
+        <div class="comments">
+            <h3>{{comments_count|default:'No'}} Comment{{comments_count|pluralize}}</h3>
+            
+            {% for comment in post_comments %}
+                <div class="comment">
+                    <div class="comment-metadata">
+                        <span class="comment-author">by {{comment.author}},</span>
+                        <span class="comment-date">{{comment.pub_date|date:"D d M Y - g:i A"}}</span>
+                    </div>
+                    <div class="comment-content">
+                        <div class="about">Detail: </div>
+                        {{ comment.content|linebreaks }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}

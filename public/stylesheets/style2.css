@@ -1,0 +1,6 @@
+@import url('http://fonts.googleapis.com/css?family=Varela Round');h1, h2, h3, h4, h5, h6, .navigation {font-family: 'Varela Round', sans-serif; !important}
+		
+		.navigation ul.menu li,
+		.navigation ul.menu li ul li a {
+			font-size: 15px !important;
+		}

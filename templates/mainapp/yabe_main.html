@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>{% block title %}{% endblock title %}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset={{ request.META.HTTP_ACCEPT_ENCODING }}"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}main.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}bootstrap.min.css"/>
+        <link rel="shortcut icon" type="image/png" href='{{ STATIC_URL }}favicon.png' />
+        {% block css %}
+        {% endblock css %}
+        <script src='{{ STATIC_URL }}jquery-1.4.2.min.js' ></script>
+        <script src='{{ STATIC_URL }}jquery.tools-1.2.5.toolbox.expose.min.js' ></script>
+        {% block js %}
+        {% endblock js %}
+        
+    </head>
+    <body>
+
+        <div id="header">
+            <div id="logo">
+                <a href='{% url home %}'>yabe</a>
+            </div>
+            {% block login %}
+                <div id="tools">
+                    {% if user.is_authenticated %}
+                        <span>You're logged in as {{ user.username }}</span><br><a href="{% url logout %}">Log out</a>
+                    {% else %}
+                        		<form class="well form-inline" action="{% url login %}" method="POST">
+		                            {% csrf_token %}
+		                            <input type="text" class="input-small" placeholder="Email" name="username"/>
+		                            <input type="password" class="input-small" placeholder="Password" name="password"/>
+		                            <label class="checkbox">
+		                            <input type="checkbox" name="remember_me"/> Remember me
+		                            </label>
+		                            <input type="hidden" name="next_page" value="{{ request.path }}" />
+		                            <button type="submit" class="btn">Sign in</button>
+                        		</form>
+                    {% endif %}
+                </div>
+            {% endblock login %}
+            {% block header %}
+            {% endblock header %}
+        </div>
+
+        <div id="main">
+            {% block main %}
+            {% endblock main %}
+        </div>
+
+        <p id="footer">
+            Yabe is a (not so) powerful blog engine built with the 
+            <a href="https://www.djangoproject.com/">Django Framework</a>
+            as a tutorial application.
+        </p>
+    </body>
+</html>

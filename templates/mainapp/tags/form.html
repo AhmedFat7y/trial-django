@@ -1,0 +1,29 @@
+	<fieldset>
+  	<legend>Log in</legend>
+  	{% for field in form.visible_fields %}
+    		{# Include the hidden fields in the form #}
+        {% if forloop.first %}
+        		{% for hidden in form.hidden_fields %}
+            		{{ hidden }}
+            {% endfor %}
+        {% endif %}
+    		{% if field.errors %}
+    				<div class="control-group error">
+    		{% else %}
+		    		<div class="control-group">
+    		{% endif %}
+      			<label class="control-label" >{{ field.label }}</label>
+      			<div class="controls">
+        				{{ field }}
+        				{% if field.errors %}
+        						<p class="help-block">{{ field.errors }}</p>
+        				{% else %}
+        						<p class="inline-help">{{ field.help_text }}</p>
+        				{% endif %}
+      			</div>
+    		</div>
+		{% endfor %}
+		{% csrf_token %}
+		<button type="submit" class="btn btn-success">{{ btn_success }}</button>
+		<button type="reset" class="btn btn-danger">{{ btn_cancel }}</button>
+</fieldset>

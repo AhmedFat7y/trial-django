@@ -1,0 +1,13 @@
+{% extends 'blog_main.html' %}
+{% block title%}'Posts tagged with ' {{tag.name}} {% endblock title %}
+{% block content %}
+{# ********* Posts list ********* #}
+{% with posts_count=tagged_posts.count %}
+    <h3>There are {{ posts_count|default:'no' }} post{{ posts_count|pluralize }} tagged with '{{tag.name}}'</h3>
+{% endwith %}
+    <div class="older-posts">    
+        {% for post in tagged_posts %}
+            {% include 'tags/display.html' with post=post as='teaser' %}
+        {% endfor %}
+    </div>
+{% endblock content %}
