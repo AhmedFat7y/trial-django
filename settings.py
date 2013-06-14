@@ -1,5 +1,3 @@
-import dj_database_url
-
 from os.path import abspath, dirname, join, exists
 from os import makedirs
 ROOT_PATH = dirname(__file__)
@@ -174,5 +172,6 @@ LOGGING = {
 
 DATABASES['default'] =  dj_database_url.config()
 
+#import dj_database_url
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
