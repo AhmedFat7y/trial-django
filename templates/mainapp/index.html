@@ -66,7 +66,7 @@ body.custom-background { background-color: #505050; }
 						<li class="item">
 							<h4>{{memory.situation}}</h4>
 							<p class="image"><a href="javascript:;">
-							<img src="{{memory.image.url}}" alt="{{memory.image.name}}" title="">							</a></p>
+							<img src="{{memory.image.url}}" alt="{{memory.image.thumbnail.url}}" title="">							</a></p>
 							<p class="details">{{memory.situation}}</p>
 							<p class="more"><a href="javascript:alert("lol");">VIEW DETAILS</a></p>
 							</li>
@@ -98,7 +98,7 @@ body.custom-background { background-color: #505050; }
 				
 				$('.nav.portfolio .navMask ul.navContent li p.image a').click(function() {
 					$('.loading').fadeIn();
-					var htmlUrl = '<img src="{{MEDIA_URL}}' + $(this).find('img').attr("alt") '"alt="" class="background" />';
+					var htmlUrl = '<img src="' + $(this).find('img').attr("alt") '" alt="" class="background" />';
 					
 					$('#background').html(htmlUrl);
 					$('#background img').load(function() {
