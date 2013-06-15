@@ -4,7 +4,7 @@ ROOT_PATH = dirname(__file__)
 
 # Django settings for wwwroot project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
