@@ -307,15 +307,15 @@ function loadNewImages() {
     var requestGET = $.ajax({
         url: urlGET,
         data: dataGET,
-    })
-    .done(function(data, textStatus, jqXHR) {
         
     })
+    .done(function(data, textStatus, jqXHR) {
+      templateNewImages(data);
+    })
     .fail(function(jqXHR, textStatus, errorThrown) {
-        loadingImagesMutex = false;
     })
     .always(function (jqXHR, textStatus, errorThrown) {
-        loadingImagesMutex = false;
+      loadingImagesMutex = false;
     });
 }
 function checkForNewImages() {
