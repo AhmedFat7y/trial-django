@@ -293,6 +293,59 @@ function blog() {
 /**************************************************
 	PORTFOLIO
 **************************************************/
+var loadingImagesMutex = false;
+function templateNewImages(jsonObj) {
+    console.log(jsonObj);
+}
+
+function loadNewImages() {
+    var urlJSON = '/get-new-images';
+    var dataJSON = {
+        totalImages: $('.images').length,
+    };
+    
+    var requestGET = $.ajax({
+        url: urlGET,
+        data: dataGET,
+    })
+    .done(function(data, textStatus, jqXHR) {
+        
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        loadingImagesMutex = false;
+    })
+    .always(function (jqXHR, textStatus, errorThrown) {
+        loadingImagesMutex = false;
+    });
+}
+function checkForNewImages() {
+    var urlGET = '/check-for-new-images';
+    var dataGET = {
+        totalImages: $('.images').length,
+    };
+    
+    var requestGET = $.ajax({
+        url: urlGET,
+        data: dataGET,
+    })
+    .done(function(data, textStatus, jqXHR) {
+        if (parseInt(data) > 0) {
+            loadNewImages();
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        loadingImagesMutex = false;
+    });
+}
+function tryLoadNewImages() {
+    if(loadingImagesMutex) {
+        return;
+    } else {
+        loadingImagesMutex = true;
+    }
+    checkForNewImages();
+}
+
 
 function portfolio() {
 	
@@ -316,13 +369,13 @@ function portfolio() {
 		jQuery(document).keydown(function(e) {
             var height = $(window).height();
             var galleryHeight = 4000;//jQuery('.nav.portfolio .navMask .navContent').height();
-            
-            if(galleryHeight > height) {
+            var upCode = 38;
+            var downCode = 40;
+            if(galleryHeight > height && (e.which == upCode || e.which == downCode)) {
+                var totalNumberOfImages = $('.image').length;
                 var heightOfOneImage = 80;
                 var numberOfVisibleImages = height / 80;
                 var amountOfOneAnimation = -heightOfOneImage;
-                var upCode = 38;
-                var downCode = 40;
                 
                 var temp = numberOfDownPresses;
                 if(e.which == upCode) {
@@ -339,10 +392,14 @@ function portfolio() {
                 } else {
                     numberOfDownPresses = temp
                 }
+                
                 console.log('numberOfDownPresses: ' + numberOfDownPresses);
                 console.log('destY: ' + destY);
                 console.log('height of nav: ' + jQuery('.nav.portfolio .navMask .navContent').height());
                 jQuery('.nav.portfolio .navMask .navContent').animate({top: destY}, {duration: 50});
+                if (totalNumbrOfImages - (numberOfDownPresses + Math.floor(numberOfVisibleImages)) < 5) {
+                    tryLoadNewImages();
+                }
             }
                 
 		});
