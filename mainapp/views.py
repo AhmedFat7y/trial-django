@@ -26,8 +26,8 @@ def get_new_images(request):
   i = 0
   for memory in memories:
     dict_to_be_dumped['%s_situation' % i] = memory.situation
-    dict_to_be_dumped ['%s_image' % i] = memory.image.url
-    dict_to_be_dumped ['%s_thumb_image' % i] = memory.image.thumbnail.url()
+    dict_to_be_dumped['%s_image' % i] = memory.image.url
+    dict_to_be_dumped['%s_thumb_image' % i] = memory.image.thumbnail.url()
     i+=1
   return HttpResponse(simplejson.dumps(dict_to_be_dumped), mimetype='application/json')
   
