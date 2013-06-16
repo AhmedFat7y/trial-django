@@ -96,7 +96,10 @@ body.custom-background { background-color: #505050; }
 					$('.navigation, .footer').animate({opacity: '0.1'}, {queue:false, duration: 500});
 				});
 				
-                var loadFulScreenImage = function(e) {
+                $('.nav.portfolio .navMask ul.navContent li p.more a').click(function(){
+                    $(this).parent().parent().find('p.image a').click();
+                });
+				$('.nav.portfolio .navMask ul.navContent li p.image a').click(function(e) {
 					$('.loading').fadeIn();
 					var htmlUrl = '<img src="' + $(this).find('img').attr("alt") + '" alt="" class="background" />';
 					
@@ -106,11 +109,7 @@ body.custom-background { background-color: #505050; }
 						$(this).fadeIn();
 						$('.loading').fadeOut();
 					});
-				};
-                $('.nav.portfolio .navMask ul.navContent li p.more a').click(function(){
-                    $(this).parent().parent().find('p.image a').click();
-                });
-				$('.nav.portfolio .navMask ul.navContent li p.image a').click(loadFulScreenImage);
+				});
 				
 				//$('.nav.portfolio .navMask ul.navContent li p.image a:eq(0)').click();
 				//$('.loading').fadeOut();
