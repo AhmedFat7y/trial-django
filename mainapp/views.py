@@ -25,10 +25,10 @@ def get_new_images(request):
   dict_to_be_dumped = {}
   i = 0
   for memory in memories:
-    dict_to_be_dumped = {'%s_situation' % i : memory.situation}
-    dict_to_be_dumped = {'%s_image' % i : memory.image.url}
-    dict_to_be_dumped = {'%s_thumb_image' % i : memory.image.thumbnail.url()}
-
+    dict_to_be_dumped['%s_situation' % i] = memory.situation
+    dict_to_be_dumped ['%s_image' % i] = memory.image.url
+    dict_to_be_dumped ['%s_thumb_image' % i] = memory.image.thumbnail.url()
+    i++
   return HttpResponse(simplejson.dumps(dict_to_be_dumped), mimetype='application/json')
   
 def check_for_new_images(request):
