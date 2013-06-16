@@ -16,8 +16,9 @@ def index(request):
   return render_to_response("mainapp/index.html", {'all_memories': memories, 'expected_number': 20}, context_instance=RequestContext(request))
 
 def get_new_images(request):
-  totalImages = _GET['totalImages']
-  try : totalImages = int(totalImages)
+  try :
+    totalImages = request.GET['totalImages']
+    totalImages = int(totalImages)
   except: return HttpResponseBadRequest()
   
   memories = Memory.objects.all()[totalImages : totalImages + 10]
@@ -31,8 +32,9 @@ def get_new_images(request):
   return HttpResponse(simplejson.dumps(dict_to_be_dumped), mimetype='application/json')
   
 def check_for_new_images(request):
-  totalImages = _GET['totalImages']
-  try : totalImages = int(totalImages)
+  try :
+    totalImages = request.GET['totalImages']
+    totalImages = int(totalImages)
   except: return HttpResponseBadRequest()
 
   memories_count = Memory.objects.all()[totalImages : totalImages + 10].count()
