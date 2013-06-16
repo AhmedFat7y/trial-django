@@ -69,8 +69,15 @@ body.custom-background { background-color: #505050; }
 							<img src="{{memory.image.thumbnail.url}}" alt="{{memory.image.url}}" title=""></a></p>
 							<p class="details">{{memory.situation}}</p>
 							<p class="more"><a href="javascript:void(0);">VIEW DETAILS</a></p>
-							</li>
-              {% endfor %}
+						</li>
+             {% endfor %}
+            <li class="item" id="progress-img" style="display: none;">
+							<h4>loading . . .</h4>
+							<p class="image"><a href="javascript:void(0)">
+							<img src="{{STATIC_URL}}imgs/progress.gif" alt="" title=""></a></p>
+							<p class="details">loading . . .</p>
+							<p class="more"><a href="javascript:void(0);">VIEW DETAILS</a></p>
+						</li>
 						<li class="paging"></li>
 					</ul>
 				</div>
@@ -95,14 +102,15 @@ body.custom-background { background-color: #505050; }
 					$('.nav.portfolio .navMask ul.navContent').animate({right: '-200px'}, {queue:false, duration: 500});
 					$('.navigation, .footer').animate({opacity: '0.1'}, {queue:false, duration: 500});
 				});
-				
-                $('.nav.portfolio .navMask ul.navContent li p.more a').click(function(){
-                    $(this).parent().parent().find('p.image a').click();
-                });
+        $('.nav.portfolio .navMask ul.navContent li p.more a').click(function(){
+            $(this).parent().parent().find('p.image a').click();
+        });
 				$('.nav.portfolio .navMask ul.navContent li p.image a').click(function(e) {
+          if($(this).attr("id") == "progress-img") {
+            return ;
+          }
 					$('.loading').fadeIn();
 					var htmlUrl = '<img src="' + $(this).find('img').attr("alt") + '" alt="" class="background" />';
-					
 					$('#background').html(htmlUrl);
 					$('#background img').load(function() {
 						background_resize();
@@ -119,7 +127,7 @@ body.custom-background { background-color: #505050; }
 
 	<!-- loading start -->
 <div class="loading" style="display: none;">
-	<img src="/static/imgs/loading.gif" alt="Loading">
+	<img src="{{STATIC_URL}}imgs/loading.gif" alt="Loading">
 </div>
 <!-- loading end -->
 

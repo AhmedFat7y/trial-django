@@ -294,8 +294,18 @@ function blog() {
 	PORTFOLIO
 **************************************************/
 var loadingImagesMutex = false;
+
 function templateNewImages(jsonObj) {
-    console.log(jsonObj);
+  for(i = 0; jsonObj[i + '_situation']; i++) {
+    var newItem = '<li class="item">\n'
+			+'<h4>' + jsonObj[i + '_situation'] + '</h4>\n'
+			+'<p class="image"><a href="javascript:void(0)">\n'
+			+'<img src="' + jsonObj[i + '_thumb_image'] + '" alt="' + jsonObj[i + '_image'] + '" title=""></a></p>\n'
+			+'<p class="details">' + jsonObj[i + '_situation'] + '</p>\n'
+      +'<p class="more"><a href="javascript:void(0);">VIEW DETAILS</a></p>\n'
+      +'</li>\n'
+    $('#progress-img').before(newItem);
+  }
 }
 
 function loadNewImages() {
@@ -311,6 +321,7 @@ function loadNewImages() {
     })
     .done(function(data, textStatus, jqXHR) {
       templateNewImages(data);
+      $('#progress-img').fadeOut();
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
     })
@@ -330,7 +341,8 @@ function checkForNewImages() {
     })
     .done(function(data, textStatus, jqXHR) {
         if (parseInt(data) > 0) {
-            loadNewImages();
+          $('#progress-img').fadeIn();
+          loadNewImages();
         }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
@@ -371,35 +383,35 @@ function portfolio() {
             var galleryHeight = jQuery('.nav.portfolio .navMask .navContent').height();
             var upCode = 38;
             var downCode = 40;
-            if(galleryHeight > height && (e.which == upCode || e.which == downCode)) {
-                var totalNumberOfImages = $('.image').length;
-                var heightOfOneImage = 80;
-                var numberOfVisibleImages = height / 80;
-                var amountOfOneAnimation = -heightOfOneImage;
-                
-                var temp = numberOfDownPresses;
-                if(e.which == upCode) {
-                    temp = numberOfDownPresses - 1;
-                } else if (e.which == downCode) {
-                    temp = numberOfDownPresses + 1;
-                }
-                
-                var destY = amountOfOneAnimation * temp;
-                if(destY > 0) {
-                    destY = 0;
-                } else if (Math.abs(destY) > galleryHeight - height) {
-                    destY = -(galleryHeight - height);
-                } else {
-                    numberOfDownPresses = temp
-                }
-                
-                console.log('numberOfDownPresses: ' + numberOfDownPresses);
-                console.log('destY: ' + destY);
-                console.log('height of nav: ' + jQuery('.nav.portfolio .navMask .navContent').height());
-                jQuery('.nav.portfolio .navMask .navContent').animate({top: destY}, {duration: 50});
-                if (totalNumberOfImages - (numberOfDownPresses + Math.floor(numberOfVisibleImages)) < 5) {
-                    tryLoadNewImages();
-                }
+            if (galleryHeight > height && (e.which == upCode || e.which == downCode)) {
+              var totalNumberOfImages = $('.image').length;
+              var heightOfOneImage = 80;
+              var numberOfVisibleImages = height / 80;
+              var amountOfOneAnimation = -heightOfOneImage;
+              
+              var temp = numberOfDownPresses;
+              if(e.which == upCode) {
+                  temp = numberOfDownPresses - 1;
+              } else if (e.which == downCode) {
+                  temp = numberOfDownPresses + 1;
+              }
+              
+              var destY = amountOfOneAnimation * temp;
+              if(destY > 0) {
+                  destY = 0;
+              } else if (Math.abs(destY) > galleryHeight - height) {
+                  destY = -(galleryHeight - height);
+              } else {
+                  numberOfDownPresses = temp
+              }
+              
+              console.log('numberOfDownPresses: ' + numberOfDownPresses);
+              console.log('destY: ' + destY);
+              console.log('height of nav: ' + jQuery('.nav.portfolio .navMask .navContent').height());
+              jQuery('.nav.portfolio .navMask .navContent').animate({top: destY}, {duration: 50});
+              if (totalNumberOfImages - (numberOfDownPresses + Math.floor(numberOfVisibleImages)) < 5) {
+                  tryLoadNewImages();
+              }
             }
                 
 		});
