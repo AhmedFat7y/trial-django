@@ -1,5 +1,5 @@
 # Create your views here.
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, HttpResponseForbidden
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core import serializers
@@ -12,10 +12,14 @@ from django.contrib import auth
 from django.core.urlresolvers import reverse
 
 def index(request):
+  if not request.user.is_authenticated():
+    return HttpResponseForbidden()
   memories = Memory.objects.all()[:20]
   return render_to_response("mainapp/index.html", {'all_memories': memories, 'expected_number': 20}, context_instance=RequestContext(request))
 
 def get_new_images(request):
+  if not request.user.is_authenticated():
+    return HttpResponseForbidden()
   try :
     totalImages = request.GET['totalImages']
     totalImages = int(totalImages)
@@ -32,6 +36,8 @@ def get_new_images(request):
   return HttpResponse(simplejson.dumps(dict_to_be_dumped), mimetype='application/json')
   
 def check_for_new_images(request):
+  if not request.user.is_authenticated():
+    return HttpResponseForbidden()
   try :
     totalImages = request.GET['totalImages']
     totalImages = int(totalImages)
