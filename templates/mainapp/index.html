@@ -65,10 +65,10 @@ body.custom-background { background-color: #505050; }
             {% for memory in all_memories%}
 						<li class="item">
 							<h4>{{memory.situation}}</h4>
-							<p class="image"><a href="javascript:;">
-							<img src="{{memory.image.thumbnail.url}}" alt="{{memory.image.url}}" title="">							</a></p>
+							<p class="image"><a href="javascript:void(0)">
+							<img src="{{memory.image.thumbnail.url}}" alt="{{memory.image.url}}" title=""></a></p>
 							<p class="details">{{memory.situation}}</p>
-							<p class="more"><a href="javascript:alert("lol");">VIEW DETAILS</a></p>
+							<p class="more"><a href="javascript:void(0);">VIEW DETAILS</a></p>
 							</li>
               {% endfor %}
 						<li class="paging"></li>
