@@ -30,7 +30,7 @@ def get_new_images(request):
 
   return HttpResponse(simplejson.dumps(dict_to_be_dumped), mimetype='application/json')
   
-def check_for_new_images(request, totalImages):
+def check_for_new_images(request):
   totalImages = _GET['totalImages']
   try : totalImages = int(totalImages)
   except: return HttpResponseBadRequest()
