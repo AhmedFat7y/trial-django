@@ -311,30 +311,40 @@ function portfolio() {
 		function(){
 			jQuery(this).animate({opacity: '1'}, {queue:false, duration: 200});
 		});
-		
-		jQuery('.nav.portfolio .navMask ul.navContent').mousemove(function(e) {
-			var _top = parseInt(jQuery('.nav.portfolio').offset().top);
-			var _contentH = parseInt(jQuery('.nav.portfolio .navMask').height()) + 5;
-			var _H = jQuery('.nav.portfolio').height() - 20;
-			var _scH = _contentH - _H;
-			var _ypos = e.pageY - _top;
-            var _H1 = _H * 1/4; 
-            var _H2 = _H * 2/4;
-            var _H3 = _H * 3/4;
-            var _H4 = _H * 4/4;
-			if(_scH > 0) {
-                if (_ypos < _H1) {
-                    _ypos = _H3;
-                } else if (_ypos > _H3) {
-                    _ypos = _H3;
-                } else if (_ypos > _H2 && _ypos < _H3) {
-                    _ypos = _ypos / 4;
-                } else if (_ypos < _H2 && _ypos > _H1) {
-                    _ypos = _ypos / 4;
+        var numberOfDownPresses = 0;
+        var animationMutex = false;
+		jQuery(document).keydown(function(e) {
+            var height = $(window).height();
+            var galleryHeight = 4000;//jQuery('.nav.portfolio .navMask .navContent').height();
+            
+            if(galleryHeight > height) {
+                var heightOfOneImage = 80;
+                var numberOfVisibleImages = height / 80;
+                var amountOfOneAnimation = -heightOfOneImage;
+                var upCode = 38;
+                var downCode = 40;
+                
+                var temp = numberOfDownPresses;
+                if(e.which == upCode) {
+                    temp = numberOfDownPresses - 1;
+                } else if (e.which == downCode) {
+                    temp = numberOfDownPresses + 1;
                 }
-				var _contentY = -(_scH / _H)*_ypos + 10;=
-				jQuery('.nav.portfolio .navMask .navContent').animate({top: _contentY}, { queue:false, duration: 50000 });
-			}
+                
+                var destY = amountOfOneAnimation * temp;
+                if(destY > 0) {
+                    destY = 0;
+                } else if (Math.abs(destY) > galleryHeight - height) {
+                    destY = -(galleryHeight - height);
+                } else {
+                    numberOfDownPresses = temp
+                }
+                console.log('numberOfDownPresses: ' + numberOfDownPresses);
+                console.log('destY: ' + destY);
+                console.log('height of nav: ' + jQuery('.nav.portfolio .navMask .navContent').height());
+                jQuery('.nav.portfolio .navMask .navContent').animate({top: destY}, {duration: 50});
+            }
+                
 		});
 	}
 }
