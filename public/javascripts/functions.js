@@ -321,7 +321,7 @@ function portfolio() {
 			
 			if(_scH > 0) {
 				var _contentY = -(_scH / _H)*_ypos + 10;
-				jQuery('.nav.portfolio .navMask .navContent').animate({top: _contentY}, { queue:false, duration: 1000 });
+				jQuery('.nav.portfolio .navMask .navContent').animate({top: _contentY}, { queue:false, duration: 3000 });
 			}
 		});
 	}
