@@ -303,7 +303,37 @@ function templateNewImages(jsonObj) {
 			+'<img src="' + jsonObj[i + '_thumb_image'] + '" alt="' + jsonObj[i + '_image'] + '" title=""></a></p>\n'
 			+'<p class="details">' + jsonObj[i + '_situation'] + '</p>\n'
       +'<p class="more"><a href="javascript:void(0);">VIEW DETAILS</a></p>\n'
-      +'</li>\n'
+      +'</li>\n';
+    newItem = $(newItem);
+    // to show arrow on hover
+    newItem.find('p.image img').hover(function(){
+    jQuery(this).animate({opacity: '0.5'}, {queue:false, duration: 200});
+    },
+    function(){
+      jQuery(this).animate({opacity: '1'}, {queue:false, duration: 200});
+    });
+    //
+    newItem.hover(function(){
+			jQuery(this).animate({right: '0px'}, {queue:false, duration: 200});
+		},
+		function(){
+			jQuery(this).animate({right: '-10px'}, {queue:false, duration: 200});
+		});
+    ////
+    newItem.find('p.image a').click(function(e) {
+      $('.loading').fadeIn();
+      var htmlUrl = '<img src="' + $(this).find('img').attr("alt") + '" alt="" class="background" />';
+      $('#background').html(htmlUrl);
+      $('#background img').load(function() {
+        background_resize();
+        $(this).fadeIn();
+        $('.loading').fadeOut();
+      });
+    });
+    ////////
+    newItem.find('p.more a').click(function(){
+            $(this).parent().parent().find('p.image a').click();
+        });
     $('#progress-img').before(newItem);
   }
 }

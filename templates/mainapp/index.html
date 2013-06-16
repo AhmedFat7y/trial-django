@@ -105,10 +105,7 @@ body.custom-background { background-color: #505050; }
         $('.nav.portfolio .navMask ul.navContent li p.more a').click(function(){
             $(this).parent().parent().find('p.image a').click();
         });
-				$('.nav.portfolio .navMask ul.navContent li p.image a').click(function(e) {
-          if($(this).attr("id") == "progress-img") {
-            return ;
-          }
+				$('.nav.portfolio .navMask ul.navContent li p.image a').not('#progress-img').click(function(e) {
 					$('.loading').fadeIn();
 					var htmlUrl = '<img src="' + $(this).find('img').attr("alt") + '" alt="" class="background" />';
 					$('#background').html(htmlUrl);
