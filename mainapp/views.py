@@ -15,7 +15,7 @@ def index(request):
   memories = Memory.objects.all()[:20]
   return render_to_response("mainapp/index.html", {'all_memories': memories, 'expected_number': 20}, context_instance=RequestContext(request))
 
- def get_new_images(request):
+def get_new_images(request):
   totalImages = _GET['totalImages']
   try : totalImages = int(totalImages)
   except: return HttpResponseBadRequest()
