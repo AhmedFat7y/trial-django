@@ -397,7 +397,7 @@ function portfolio() {
                 console.log('destY: ' + destY);
                 console.log('height of nav: ' + jQuery('.nav.portfolio .navMask .navContent').height());
                 jQuery('.nav.portfolio .navMask .navContent').animate({top: destY}, {duration: 50});
-                if (totalNumbrOfImages - (numberOfDownPresses + Math.floor(numberOfVisibleImages)) < 5) {
+                if (totalNumberOfImages - (numberOfDownPresses + Math.floor(numberOfVisibleImages)) < 5) {
                     tryLoadNewImages();
                 }
             }
