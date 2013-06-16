@@ -318,18 +318,18 @@ function portfolio() {
 			var _H = jQuery('.nav.portfolio').height() - 20;
 			var _scH = _contentH - _H;
 			var _ypos = e.pageY - _top;
-            var _scH1 = _scH * 1/4; 
-            var _scH2 = _scH * 2/4;
-            var _scH3 = _scH * 3/4;
-            var _scH4 = _scH * 4/4;
+            var _H1 = _H * 1/4; 
+            var _H2 = _H * 2/4;
+            var _H3 = _H * 3/4;
+            var _H4 = _H * 4/4;
 			if(_scH > 0) {
-                if (_ypos < _scH1) {
-                    _ypos = _scH3;
-                } else if (_ypos > _scH3) {
-                    _ypos = _scH3;
-                } else if (_ypos > _scH2 && _ypos < _scH3) {
+                if (_ypos < _H1) {
+                    _ypos = _H3;
+                } else if (_ypos > _H3) {
+                    _ypos = _H3;
+                } else if (_ypos > _H2 && _ypos < _H3) {
                     _ypos = _ypos / 4;
-                } else if (_ypos < _scH2 && _ypos > _scH1) {
+                } else if (_ypos < _H2 && _ypos > _H1) {
                     _ypos = _ypos / 4;
                 }
 				var _contentY = -(_scH / _H)*_ypos + 10;
