@@ -11,5 +11,5 @@ from django.contrib import auth
 from django.core.urlresolvers import reverse
 
 def index(request):
-  memories = Memory.objects.all()[:50]
-  return render_to_response("mainapp/index.html", {'all_memories': memories}, context_instance=RequestContext(request))
+  memories = Memory.objects.all()[:20]
+  return render_to_response("mainapp/index.html", {'all_memories': memories, 'expected_number': 20}, context_instance=RequestContext(request))
