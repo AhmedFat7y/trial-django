@@ -301,7 +301,7 @@ function templateNewImages(jsonObj) {
 function loadNewImages() {
     var urlJSON = '/get-new-images';
     var dataJSON = {
-        totalImages: $('.images').length,
+        totalImages: $('.image').length,
     };
     
     var requestGET = $.ajax({
@@ -321,7 +321,7 @@ function loadNewImages() {
 function checkForNewImages() {
     var urlGET = '/check-for-new-images';
     var dataGET = {
-        totalImages: $('.images').length,
+        totalImages: $('.image').length,
     };
     
     var requestGET = $.ajax({
@@ -368,7 +368,7 @@ function portfolio() {
         var animationMutex = false;
 		jQuery(document).keydown(function(e) {
             var height = $(window).height();
-            var galleryHeight = 4000;//jQuery('.nav.portfolio .navMask .navContent').height();
+            var galleryHeight = jQuery('.nav.portfolio .navMask .navContent').height();
             var upCode = 38;
             var downCode = 40;
             if(galleryHeight > height && (e.which == upCode || e.which == downCode)) {
