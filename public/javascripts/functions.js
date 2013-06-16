@@ -299,14 +299,14 @@ function templateNewImages(jsonObj) {
 }
 
 function loadNewImages() {
-    var urlJSON = '/get-new-images';
+    var urlJSON = '/get-new-images/';
     var dataJSON = {
         totalImages: $('.image').length,
     };
     
-    var requestGET = $.ajax({
-        url: urlGET,
-        data: dataGET,
+    var requestJSON = $.ajax({
+        url: urlJSON,
+        data: dataJSON,
         
     })
     .done(function(data, textStatus, jqXHR) {
@@ -319,7 +319,7 @@ function loadNewImages() {
     });
 }
 function checkForNewImages() {
-    var urlGET = '/check-for-new-images';
+    var urlGET = '/check-for-new-images/';
     var dataGET = {
         totalImages: $('.image').length,
     };
