@@ -332,8 +332,8 @@ function portfolio() {
                 } else if (_ypos < _H2 && _ypos > _H1) {
                     _ypos = _ypos / 4;
                 }
-				var _contentY = -(_scH / _H)*_ypos + 10;
-				jQuery('.nav.portfolio .navMask .navContent').animate({top: _contentY}, { queue:false, duration: 3000 });
+				var _contentY = -(_scH / _H)*_ypos + 10;=
+				jQuery('.nav.portfolio .navMask .navContent').animate({top: _contentY}, { queue:false, duration: 50000 });
 			}
 		});
 	}
