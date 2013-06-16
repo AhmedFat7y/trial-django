@@ -107,7 +107,9 @@ body.custom-background { background-color: #505050; }
 						$('.loading').fadeOut();
 					});
 				};
-                $('.nav.portfolio .navMask ul.navContent li p.more a').click(loadFulScreenImage);
+                $('.nav.portfolio .navMask ul.navContent li p.more a').click(function(){
+                    $(this).parent().parent().find('p.image a').click();
+                });
 				$('.nav.portfolio .navMask ul.navContent li p.image a').click(loadFulScreenImage);
 				
 				//$('.nav.portfolio .navMask ul.navContent li p.image a:eq(0)').click();
