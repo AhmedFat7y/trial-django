@@ -1,22 +1,25 @@
+{% load url from future %}
 <!DOCTYPE html>
-<!-- saved from url=(0064)http://themes.purelayers.com/contrast/category/portfolio/?type=1 -->
 <html>
 	<meta name="author" content="Pure Layers">
 	<meta name="keywords" content="Dr. Fatma, Tribute, Gift, Memory">
 	<meta name="robots" content="all">
 
-	<title>Dr. Fatma Memories</title>
+	<title>{% block title %}Default Title{%endblock title%}</title>
 
 <style type="text/css" id="custom-background-css">
 body.custom-background { background-color: #505050; }
 </style>
 	<link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style.css">
 	<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/shortcodes.css">
-	
 	<!--[if IE 7]><link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style-IE7.css" /><![endif]-->
 	<!--[if IE 9]><link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style-IE9.css" /><![endif]-->
-	
-	<script type="text/javascript" async="" src="{{STATIC_URL}}scripts/ga.js"></script>
+	{% block css %}
+  {% endblock css %}
+	<!------------------------------------------------------------------>
+  {% block js %}
+  {% endblock js %}
+  {% comment %} <script type="text/javascript" async="" src="{{STATIC_URL}}scripts/ga.js"></script> {% endcomment %}
 	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-1.7.1.min.js"></script>
 	<style type="text/css"></style>
 	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-ui-1.8.14.custom.min.js"></script>
@@ -40,52 +43,52 @@ body.custom-background { background-color: #505050; }
 	<!-- header start -->
 	<div class="header">
 		<!-- logo start -->
-				<div class="logo"><a href="#">Dr. Fatma</a></div>
+		<div class="logo"><a href="#">Dr. Fatma</a></div>
 		<!-- logo end -->
-		
-		<div class="navigation" style="top: 197px; display: block; opacity: 1;">
-			<!-- menu start -->
-			<ul id="menu-main-menu" class="menu">
-				<li id="menu-item-4" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4">
-					<a href="/">Home</a>
-				</li>
-			</ul>
-		</div>
+		<!-- navigation start -->
+    <div class="navigation" style="top: -61.5px; display: block; opacity: 1;">
+      <!-- menu start -->
+      <ul id="menu-main-menu" class="menu">
+        <li id="menu-item-4" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4">
+          <a href="/">Home</a>
+        </li>
+        <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7">
+          <a href="/quotes/" class="theme_color_1" style="">Quotes</a>
+        </li>
+        <li id="menu-item-9" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9">
+          <a href="#">Memories</a>
+          <ul class="sub-menu" style="display: none;">
+            <li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29">
+              <a href="{% url 'memories' memories_group='SE-2009' %}">SE 2009</a>
+            </li>
+            <li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33">
+              <a href="{% url 'memories' memories_group='SE-2010' %}">SE 2010</a>
+            </li>
+            <li id="menu-item-51" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-51">
+              <a href="{% url 'memories' memories_group='SE-2011' %}">SE 2011</a>
+            </li>
+            <li id="menu-item-25" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25">
+              <a href="{% url 'memories' memories_group='SE-2012' %}">SE 2012</a>
+            </li>
+            <li id="menu-item-27" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27">
+              <a href="{% url 'memories' memories_group='SE-2013' %}">SE 2013</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- menu end -->
+    </div>
+    <!-- navigation end -->
 	</div>
 	<!-- header end -->
-	
-			
-						
-		<!-- content start -->
-		<div class="content">
-			<div class="nav portfolio" style="height: 629px;">
-				<div class="navMask">
-					<ul class="navContent" style="right: 0px; top: 6.984662576687116px;">
-						<li class="paging"></li>
-            {% for memory in all_memories%}
-						<li class="item">
-							<h4>{{memory.situation}}</h4>
-							<p class="image"><a href="javascript:void(0)">
-							<img src="{{memory.image.thumbnail.url}}" alt="{{memory.image.url}}" title=""></a></p>
-							<p class="details">{{memory.situation}}</p>
-							<p class="more"><a href="javascript:void(0);">VIEW DETAILS</a></p>
-						</li>
-             {% endfor %}
-            <li class="item" id="progress-img" style="display: none;">
-							<h4>loading . . .</h4>
-							<p class="image"><a href="javascript:void(0)">
-							<img src="{{STATIC_URL}}imgs/progress.gif" alt="" title=""></a></p>
-							<p class="details">loading . . .</p>
-							<p class="more"><a href="javascript:void(0);">VIEW DETAILS</a></p>
-						</li>
-						<li class="paging"></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- content end -->
-		
-				
+
+
+
+  {% block content %}
+  {% endblock content %}
+
+
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 				//cool this, right?
@@ -136,10 +139,10 @@ body.custom-background { background-color: #505050; }
 	<div class="footer" style="opacity: 1;">
 	{% comment %}
 				<ul class="social">
-			<li><a href="http://themes.purelayers.com/contrast/feed/rss/" class="icon-rss">RSS</a></li>												<li><a href="http://www.facebook.com/" class="icon-facebook">Facebook</a></li>						<li><a href="http://www.flickr.com/" class="icon-flickr">Flickr</a></li>																					<li><a href="http://www.twitter.com/" class="icon-twitter">Twitter</a></li>								</ul>
+			<li><a href="#">Twitter</a></li>								</ul>
 				
 		<div class="copyright">
-						<p>Copyright © <a href="http://themes.purelayers.com/contrast">Contrast</a>. All Rights Reserved. Powered by <a href="http://www.themetoucan.com/">Wordpress Themes</a></p>
+						<p>Copyright © <a href="#">Wordpress Themes</a></p>
 					</div>
 	{% endcomment %}
 	</div>

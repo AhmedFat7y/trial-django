@@ -1,0 +1,43 @@
+{% extends 'mainapp/main_layout.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}	
+<div class="container">
+
+  <!-- loading start -->
+  <div class="loading">
+    <img src="{{STATIC_URL}}imgs/loading.gif" alt="Loading">
+  </div>
+  <!-- loading end -->
+  
+  <!-- background start -->
+  <div id="background">
+    <script type="text/javascript">
+      jQuery(function($){
+        var slides = [];
+        for (var i = 0; i < {{images_count}}; i++) {
+          slides[i] = {image : '{{MEDIA_URL}}memories-images/' + i + '.JPEG'}
+        }
+        $.supersized({
+          slide_interval		: 4000,
+          transition			  : 1,
+          transition_speed	: 750,
+          slide_links			  : 'blank',
+          slides 				    : slides,
+          random            : true
+        });
+      });
+    </script>
+
+    <div id="progress-back" class="load-item" style="display: block;">
+      <div id="progress-bar"></div>
+    </div>
+
+
+    <div class="pattern pattern-03">&nbsp;</div>
+
+  </div>
+  <!-- background end -->	
+</div>
+{% endblock content %}	

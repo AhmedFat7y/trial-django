@@ -19,7 +19,7 @@ class Memory(models.Model):
   is_hidden = models.BooleanField()
   def __unicode__(self):
     return self.situation
-    
+
 class Quote(models.Model):
   owner_image = StdImageField(upload_to=QUOTES_OWNERS_IMAGES, blank=True, thumbnail_size=(150, 75, True))
   quote_related_image = StdImageField(upload_to=QUOTES_RELATED_IMAGES, blank=True, size=(1920, 1200), thumbnail_size=(150, 75, True))

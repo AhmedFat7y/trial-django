@@ -1,0 +1,73 @@
+{% extends 'mainapp/main_layout.html' %}
+
+{% load url from future %}
+
+{% block title %}Quotes About Dr. Fatma{% endblock title %}
+{% block js %}
+  <script>
+    var getNewQuotesURL = "{%url 'get_new_quotes'%}";
+    var checkForNewQuotesURL = "{%url 'check_for_new_quotes'%}";
+  </script>
+{% endblock js %}
+{% block content %}
+  <!-- loading start -->
+  <div class="loading">
+    <img src="{{STATIC_URL}}imgs/loading.gif" alt="Loading">
+  </div>
+  <!-- loading end -->
+  
+  <!-- background start -->
+  <div id="background">
+    <script type="text/javascript">
+      jQuery(function($){
+        var slides = [];
+        for (var i = 0; i < {{images_count}}; i++) {
+          slides[i] = {image : '{{MEDIA_URL}}memories-images/' + i + '.JPEG'}
+        }
+        $.supersized({
+          slide_interval		: 4000,
+          transition			  : 1,
+          transition_speed	: 750,
+          slide_links			  : 'blank',
+          slides 				    : slides,
+          random            : true
+        });
+      });
+    </script>
+
+    <div id="progress-back" class="load-item" style="display: block;">
+      <div id="progress-bar"></div>
+    </div>
+    
+    <div class="pattern pattern-03">&nbsp;</div>
+
+  </div>
+  <!-- background end -->	
+  <!-- content start -->
+  <div class="content">
+    
+    <div class="nav blog" style="">
+      <div class="navMask">      
+        <ul class="navContent" style="">
+          <li class="paging"></li>
+          {% for quote in all_quotes%}
+            <li>
+              <a href="#" style="">
+                {{quote.content|slice:":30"|add:". . ."}}
+                <span class="date">Name: {{quote.owner_name}}</span>
+              </a>
+            </li>
+           {% endfor %}
+          <li id="progress-quote">
+            <a href="#" style="">
+                loading . . .
+                <span class="date">Name: loading . . .</span>
+              </a>
+          </li>
+          <li class="paging"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+{% endblock content %}

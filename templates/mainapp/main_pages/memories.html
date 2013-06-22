@@ -1,0 +1,43 @@
+{% extends 'mainapp/main_layout.html' %}
+
+{% load url from future %}
+
+{% block js %}
+  <script>
+    var getNewMemoriesURL = "{%url 'get_new_memories' memories_group=memories_group%}";
+    var checkForNewMemoriesURL = "{%url 'check_for_new_memories' memories_group=memories_group%}";
+  </script>
+{% endblock js %}
+
+{% block title %}Dr. Fatma's Memories{% endblock title %}
+
+{% block content %}
+  <!-- content start -->
+  <div class="content">
+    <div class="nav portfolio" style="">
+      <div class="navMask">
+        <ul class="navContent" style="">
+          <li class="paging"></li>
+          {% for memory in all_memories%}
+          <li class="item">
+            <h4>{{memory.situation}}</h4>
+            <p class="image"><a href="javascript:void(0)">
+            <img src="{{memory.image.thumbnail.url}}" alt="{{memory.image.url}}" title=""></a></p>
+            <p class="details">{{memory.situation}}</p>
+            <p class="more"><a href="javascript:void(0);">VIEW DETAILS</a></p>
+          </li>
+           {% endfor %}
+          <li class="item" id="progress-img" style="display: none;">
+            <h4>loading . . .</h4>
+            <p class="image"><a href="javascript:void(0)">
+            <img src="{{STATIC_URL}}imgs/progress.gif" alt="" title=""></a></p>
+            <p class="details">loading . . .</p>
+            <p class="more"><a href="javascript:void(0);">VIEW DETAILS</a></p>
+          </li>
+          <li class="paging"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+{% endblock content %}
