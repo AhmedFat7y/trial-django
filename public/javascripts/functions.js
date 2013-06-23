@@ -354,8 +354,12 @@ function blog() {
 		jQuery(document).keydown(function(e) {
             var upCode = 38;
             var downCode = 40;
-            if (e.which != upCode && e.which != downCode) {
+            if (e.which != upCode && e.which != downCode && e.keyCode != upCode && e.keyCode != downCode) {
               return ;
+            } else {
+              if(!e.which) {
+                e.which = e.keycode;
+              }
             }
             var height = $(window).height();
             var galleryHeight = jQuery('.nav.blog .navMask .navContent').height();
@@ -515,11 +519,18 @@ function portfolio() {
         var numberOfDownPresses = 0;
         var animationMutex = false;
 		jQuery(document).keydown(function(e) {
-            var height = $(window).height();
-            var galleryHeight = jQuery('.nav.portfolio .navMask .navContent').height();
             var upCode = 38;
             var downCode = 40;
-            if (galleryHeight > height && (e.which == upCode || e.which == downCode)) {
+            if (e.which != upCode && e.which != downCode && e.keyCode != upCode && e.keyCode != downCode) {
+              return ;
+            } else {
+              if(!e.which) {
+                e.which = e.keycode;
+              }
+            }
+            var height = $(window).height();
+            var galleryHeight = jQuery('.nav.portfolio .navMask .navContent').height();
+            if (galleryHeight > height) {
               var totalNumberOfImages = $('.image').length;
               var heightOfOneImage = 80;
               var numberOfVisibleImages = height / 80;

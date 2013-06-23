@@ -30,3 +30,26 @@
 
 <a id="down-arrow" class="navigation-arrow">
 </a>
+
+<script>
+  var maxwidth = 0;
+  $('.navMask .navContent li').each(function (){
+    var self = $(this);
+    if(self.width() > maxwidth) {
+      maxwidth = self.width();
+    }
+  });
+  $('.navigation-arrow').css({right: maxwidth + 30});
+  $('.navigation-arrow').click(function(){
+    var self = $(this);
+    var upCode = 38;
+    var downCode = 40;
+    var e = jQuery.Event("keydown");
+    if(self.attr("id").charAt(0) == 'u') {
+      e.which = upCode;
+    } else {
+      e.which = downCode; // # Some key code valueOf
+    }
+    $(document).trigger(e);
+  });
+</script>
