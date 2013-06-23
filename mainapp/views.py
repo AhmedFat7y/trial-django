@@ -1,5 +1,5 @@
 # Create your views here.
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, HttpResponseForbidden, HttpResponseBadRequest
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core import serializers
@@ -43,6 +43,18 @@ def quotes(request):
     'expected_number': 20,
   }
   return render_to_response("mainapp/main_pages/quotes.html", data, context_instance=RequestContext(request))
+
+def quote(request, quote_id):
+  if not request.user.is_authenticated():
+    return HttpResponseForbidden()
+  quote = QuoteRepository.find(quote_id)
+  if not quote:
+    return HttpResponseBadRequest
+  dict_to_be_dumped = {
+    'owner_name': quote.owner_name,
+    'quote_content': quote.content,
+  }
+  return HttpResponse(simplejson.dumps(dict_to_be_dumped), mimetype='application/json')
 
 def get_new_memories(request, memories_group):
   if not request.user.is_authenticated():

@@ -7,42 +7,11 @@
   <script>
     var getNewQuotesURL = "{%url 'get_new_quotes'%}";
     var checkForNewQuotesURL = "{%url 'check_for_new_quotes'%}";
+    var getQuoteContentURL = "{%url 'quote' quote_id="0"%}";
   </script>
 {% endblock js %}
 {% block content %}
-  <!-- loading start -->
-  <div class="loading">
-    <img src="{{STATIC_URL}}imgs/loading.gif" alt="Loading">
-  </div>
-  <!-- loading end -->
-  
-  <!-- background start -->
-  <div id="background">
-    <script type="text/javascript">
-      jQuery(function($){
-        var slides = [];
-        for (var i = 0; i < {{images_count}}; i++) {
-          slides[i] = {image : '{{MEDIA_URL}}memories-images/' + i + '.JPEG'}
-        }
-        $.supersized({
-          slide_interval		: 4000,
-          transition			  : 1,
-          transition_speed	: 750,
-          slide_links			  : 'blank',
-          slides 				    : slides,
-          random            : true
-        });
-      });
-    </script>
-
-    <div id="progress-back" class="load-item" style="display: block;">
-      <div id="progress-bar"></div>
-    </div>
-    
-    <div class="pattern pattern-03">&nbsp;</div>
-
-  </div>
-  <!-- background end -->	
+  {% include 'mainapp/tags/slideshow.html' with images_count=images_count MEDIA_URL=MEDIA_URL %}
   <!-- content start -->
   <div class="content">
     
@@ -52,9 +21,9 @@
           <li class="paging"></li>
           {% for quote in all_quotes%}
             <li>
-              <a href="#" style="">
+              <a id="quote-{{quote.id}}" href="#" style="">
                 {{quote.content|slice:":30"|add:". . ."}}
-                <span class="date">Name: {{quote.owner_name}}</span>
+                <span>Name: {{quote.owner_name}}</span>
               </a>
             </li>
            {% endfor %}
@@ -70,4 +39,70 @@
     </div>
   </div>
   <!-- content end -->
+  <div id="complete-quote-content" class="theme_color_1" style="display: none;">
+    <div class="loading" style="">
+      <img src="{{STATIC_URL}}imgs/loading.gif" alt="Loading">
+    </div>
+    <p class="quote-content"></p>
+    <span class="date"></span>
+  </div>
+  <script>
+    var currentQuoteRequest;
+    function templateTheQuoetContent(data) {
+      $("#complete-quote-content").find('p').text(data.quote_content);
+      $("#complete-quote-content").find('span').text("Name: " + data.owner_name);
+    }
+    function getQuoteContent(quoteID) {
+     if (currentQuoteRequest) {
+      currentQuoteRequest.abort();
+     }
+     quoteID = quoteID.split('-')[1];
+      currentQuoteRequest = $.ajax({
+        url: getQuoteContentURL.slice(0, getQuoteContentURL.length - 1) + quoteID,
+        data: {},
+      })
+      .done(function(data, textStatus, jqXHR) {
+        templateTheQuoetContent(data);
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        $("#complete-quote-content").fadeOut();
+      })
+      .always(function (jqXHR, textStatus, errorThrown) {
+        $("#complete-quote-content div.loading").fadeOut();
+      });
+    }
+    $('.nav.blog .navMask .navContent li a').click(function(){
+      var self = $(this);
+      
+      var quoteDiv = $('#complete-quote-content');
+      var startright = 0;
+      $.each($('.nav.blog .navMask .navContent li a'), function(){
+        var self = $(this);
+        if(self.width() > startright) {
+          startright = self.width()
+        }
+      });
+      var startleft = $('#menu-main-menu>li').width();
+      var freewidth = $(window).width() - (startright + startleft);
+      $('#complete-quote-content').css({
+          left     : startleft + 10,
+          width    : freewidth - 40,
+          height   : $(window).height() / 2,
+          top      : $(window).height() / 4,
+          position : 'absolute'
+      });
+      $('#complete-quote-content').fadeOut(10, 'linear').fadeIn("fast");
+      $("#complete-quote-content div.loading").fadeIn();
+      getQuoteContent(self.attr("id"));
+    });
+    
+    $("#complete-quote-content").hover(function(){
+      var self = $(this);
+      self.animate({opacity: 1}, {duration: 500, queue: false});
+    },
+    function(){
+      var self = $(this);
+      self.animate({opacity: 0.5}, {duration: 500, queue: false});
+    });
+  </script>
 {% endblock content %}
