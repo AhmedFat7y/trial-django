@@ -4,12 +4,32 @@
 
 {% block title %}Quotes About Dr. Fatma{% endblock title %}
 {% block js %}
+  <link href='http://fonts.googleapis.com/css?family=Crafty+Girls' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Life+Savers:700' rel='stylesheet' type='text/css'>
   <script>
     var getNewQuotesURL = "{%url 'get_new_quotes'%}";
     var checkForNewQuotesURL = "{%url 'check_for_new_quotes'%}";
     var getQuoteContentURL = "{%url 'quote' quote_id="0"%}";
   </script>
 {% endblock js %}
+{% block css %}
+  <style>
+    #complete-quote-content p {
+      font-family : 'Crafty Girls';
+      font-size   : 16px;
+      text-shadow : 0px 0px 0px #aaa;
+      margin      : 10px 10px 10px 10px;
+      direction   : auto;
+    }
+    #complete-quote-content span{
+      text-shadow : 4px 4px 4px #aaa;
+      font-family : 'Life Savers';
+      font-size   : 20px;
+      margin      : 10px 10px 10px 10px;
+      direction   : auto;
+    }
+  </style>
+{% endblock css%}
 {% block content %}
   {% include 'mainapp/tags/slideshow.html' with images_count=images_count MEDIA_URL=MEDIA_URL %}
   <!-- content start -->
@@ -43,13 +63,22 @@
     <div class="loading" style="">
       <img src="{{STATIC_URL}}imgs/loading.gif" alt="Loading">
     </div>
-    <p class="quote-content"></p>
-    <span class="date"></span>
+    <center><p class="quote-content"></p><center>
+    <center><span class="date"></span><center>
   </div>
   <script>
     var currentQuoteRequest;
     function templateTheQuoetContent(data) {
       $("#complete-quote-content").find('p').text(data.quote_content);
+      if(/^[\x00-\xFF]{2}/.test(data.quote_content)) {
+        $("#complete-quote-content").find('p').css({
+          direction: "ltr"
+        });
+      } else {
+        $("#complete-quote-content").find('p').css({
+          direction: "rtl"
+        });      
+      }
       $("#complete-quote-content").find('span').text("Name: " + data.owner_name);
     }
     function getQuoteContent(quoteID) {
@@ -105,4 +134,5 @@
       self.animate({opacity: 0.5}, {duration: 500, queue: false});
     });
   </script>
+{% include 'mainapp/tags/navigation-arrows.html' with STATIC_URL=STATIC_URL %}
 {% endblock content %}
