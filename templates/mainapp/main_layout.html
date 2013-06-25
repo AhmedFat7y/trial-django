@@ -1,157 +1,154 @@
 {% load url from future %}
 <!DOCTYPE html>
 <html>
-	<meta name="author" content="Pure Layers">
-	<meta name="keywords" content="Dr. Fatma, Tribute, Gift, Memory">
-	<meta name="robots" content="all">
+  <meta name="author" content="Pure Layers">
+  <meta name="keywords" content="Dr. Fatma, Tribute, Gift, Memory">
+  <meta name="robots" content="all">
+  <title>{% block title %}Default Title{%endblock title%}</title>
 
-	<title>{% block title %}Default Title{%endblock title%}</title>
-
-<style type="text/css" id="custom-background-css">
-body.custom-background { background-color: #505050; }
-</style>
-	<link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style.css">
-	<link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/shortcodes.css">
-	<!--[if IE 7]><link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style-IE7.css" /><![endif]-->
-	<!--[if IE 9]><link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style-IE9.css" /><![endif]-->
-	{% block css %}
+  <style type="text/css" id="custom-background-css">
+    body.custom-background { background-color: #505050; }
+  </style>
+  <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style.css">
+  <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/shortcodes.css">
+  <!--[if IE 7]><link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style-IE7.css" /><![endif]-->
+  <!--[if IE 9]><link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style-IE9.css" /><![endif]-->
+  {% block css %}
   {% endblock css %}
-	<!------------------------------------------------------------------>
+  <!------------------------------------------------------------------>
   {% block js %}
   {% endblock js %}
   {% comment %} <script type="text/javascript" async="" src="{{STATIC_URL}}scripts/ga.js"></script> {% endcomment %}
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-1.7.1.min.js"></script>
-	<style type="text/css"></style>
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-ui-1.8.14.custom.min.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.nivo.slider.pack.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.prettyPhoto.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.tipsy.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/shortcodes.js"></script>
-	
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.easing.min.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/supersized.3.2.7.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/supersized.shutter.js"></script>
-	
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.inputs.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/swfobject.js"></script>
-	<script type="text/javascript" src="{{STATIC_URL}}scripts/functions.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-1.7.1.min.js"></script>
+  <style type="text/css"></style>
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-ui-1.8.14.custom.min.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.nivo.slider.pack.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.prettyPhoto.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.tipsy.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/shortcodes.js"></script>
+  
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.easing.min.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/supersized.3.2.7.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/supersized.shutter.js"></script>
+  
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.inputs.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/swfobject.js"></script>
+  <script type="text/javascript" src="{{STATIC_URL}}scripts/functions.js"></script>
 </head>
 
-<body class="archive category category-portfolio category-4 custom-background">
+  <body class="archive category category-portfolio category-4 custom-background">
 
-<div class="container">
-	<!-- header start -->
-	<div class="header">
-		<!-- logo start -->
-		<div class><a href="#"></a></div>
-		<!-- logo end -->
-		<!-- navigation start -->
-    <div class="navigation" style="top: -61.5px; display: block; opacity: 1;">
-      <!-- menu start -->
-      <ul id="menu-main-menu" class="menu">
-        <li id="menu-item-4" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4">
-          <a href="/">Home</a>
-        </li>
-        <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7">
-          <a href="/quotes/" class="theme_color_1" style="">Quotes</a>
-        </li>
-        <li id="menu-item-9" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9">
-          <a href="#">Memories</a>
-          <ul class="sub-menu" style="display: none;">
-            <li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29">
-              <a href="{% url 'memories' memories_group='SE-2009' %}">SE 2009</a>
+    <div class="container">
+      <!-- header start -->
+      <div class="header">
+        <!-- logo start -->
+        <div class><a href="#"></a></div>
+        <!-- logo end -->
+        <!-- navigation start -->
+        <div class="navigation" style="top: -61.5px; display: block; opacity: 1;">
+          <!-- menu start -->
+          <ul id="menu-main-menu" class="menu">
+            <li id="menu-item-4" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4">
+              <a href="/">Home</a>
             </li>
-            <li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33">
-              <a href="{% url 'memories' memories_group='SE-2010' %}">SE 2010</a>
+            <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7">
+              <a href="/quotes/" class="theme_color_1" style="">Quotes</a>
             </li>
-            <li id="menu-item-51" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-51">
-              <a href="{% url 'memories' memories_group='SE-2011' %}">SE 2011</a>
+            <li id="menu-item-9" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9">
+              <a href="#">Memories</a>
+              <ul class="sub-menu" style="display: none;">
+                <li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29">
+                  <a href="{% url 'memories' memories_group='SE-2009' %}">SE 2009</a>
+                </li>
+                <li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33">
+                  <a href="{% url 'memories' memories_group='SE-2010' %}">SE 2010</a>
+                </li>
+                <li id="menu-item-51" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-51">
+                  <a href="{% url 'memories' memories_group='SE-2011' %}">SE 2011</a>
+                </li>
+                <li id="menu-item-25" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25">
+                  <a href="{% url 'memories' memories_group='SE-2012' %}">SE 2012</a>
+                </li>
+                <li id="menu-item-27" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27">
+                  <a href="{% url 'memories' memories_group='SE-2013' %}">SE 2013</a>
+                </li>
+              </ul>
             </li>
-            <li id="menu-item-25" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25">
-              <a href="{% url 'memories' memories_group='SE-2012' %}">SE 2012</a>
+            {% comment %}
+            <li id="menu-item-5" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5">
+              <a href="/about">About</a>
             </li>
-            <li id="menu-item-27" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27">
-              <a href="{% url 'memories' memories_group='SE-2013' %}">SE 2013</a>
-            </li>
+            {% endcomment %}
           </ul>
-        </li>
-        <li id="menu-item-5" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5">
-          <a href="/about">About</a>
-        </li>
-      </ul>
-      <!-- menu end -->
-    </div>
-    <!-- navigation end -->
-	</div>
-	<!-- header end -->
+          <!-- menu end -->
+        </div>
+        <!-- navigation end -->
+      </div>
+      <!-- header end -->
 
 
 
-  {% block content %}
-  {% endblock content %}
+      {% block content %}
+      {% endblock content %}
 
 
 
-		<script type="text/javascript">
-			$(document).ready(function() {
-				//cool this, right?
-				setTimeout(function(){
-					$('.nav.portfolio .navMask ul.navContent').animate({right: '-200px'}, {queue:false, duration: 500});
-					$('.navigation, .footer').animate({opacity: '0.1'}, {queue:false, duration: 500});
-				}, 1000);
-				
-				$('.nav.portfolio .navMask ul.navContent, .navigation, .footer').hover(function() {
-					$('.nav.portfolio .navMask ul.navContent').animate({right: '0px'}, {queue:false, duration: 500});
-					$('.navigation, .footer').animate({opacity: '1'}, {queue:false, duration: 500});
-				},
-				function(){
-					$('.nav.portfolio .navMask ul.navContent').animate({right: '-200px'}, {queue:false, duration: 500});
-					$('.navigation, .footer').animate({opacity: '0.1'}, {queue:false, duration: 500});
-				});
-        $('.nav.portfolio .navMask ul.navContent li p.more a').click(function(){
-            $(this).parent().parent().find('p.image a').click();
+      <script type="text/javascript">
+        $(document).ready(function() {
+          //cool this, right?
+          setTimeout(function(){
+            $('.nav.portfolio .navMask ul.navContent').animate({right: '-200px'}, {queue:false, duration: 500});
+            $('.navigation, .footer').animate({opacity: '0.1'}, {queue:false, duration: 500});
+          }, 1000);
+          
+          $('.nav.portfolio .navMask ul.navContent, .navigation, .footer').hover(function() {
+            $('.nav.portfolio .navMask ul.navContent').animate({right: '0px'}, {queue:false, duration: 500});
+            $('.navigation, .footer').animate({opacity: '1'}, {queue:false, duration: 500});
+          },
+          function(){
+            $('.nav.portfolio .navMask ul.navContent').animate({right: '-200px'}, {queue:false, duration: 500});
+            $('.navigation, .footer').animate({opacity: '0.1'}, {queue:false, duration: 500});
+          });
+          $('.nav.portfolio .navMask ul.navContent li p.more a').click(function(){
+              $(this).parent().parent().find('p.image a').click();
+          });
+          $('.nav.portfolio .navMask ul.navContent li p.image a').not('#progress-img').click(function(e) {
+            $('.loading').fadeIn();
+            var htmlUrl = '<img src="' + $(this).find('img').attr("alt") + '" alt="" class="background" />';
+            $('#background').html(htmlUrl);
+            $('#background img').load(function() {
+              background_resize();
+              $(this).fadeIn();
+              $('.loading').fadeOut();
+            });
+          });
+          $('.loading').fadeOut();
         });
-				$('.nav.portfolio .navMask ul.navContent li p.image a').not('#progress-img').click(function(e) {
-					$('.loading').fadeIn();
-					var htmlUrl = '<img src="' + $(this).find('img').attr("alt") + '" alt="" class="background" />';
-					$('#background').html(htmlUrl);
-					$('#background img').load(function() {
-						background_resize();
-						$(this).fadeIn();
-						$('.loading').fadeOut();
-					});
-				});
-				
-				//$('.nav.portfolio .navMask ul.navContent li p.image a:eq(0)').click();
-				//$('.loading').fadeOut();
-			});
-		</script>
-		
+      </script>
+        
 
-	<!-- loading start -->
-<div class="loading" style="display: none;">
-	<img src="{{STATIC_URL}}imgs/loading.gif" alt="Loading">
-</div>
-<!-- loading end -->
+      <!-- loading start -->
+      <div class="loading" style="display: none;">
+        <img src="{{STATIC_URL}}imgs/loading.gif" alt="Loading">
+      </div>
+      <!-- loading end -->
 
-<!-- background start -->
-<div id="background"></div>
-<!-- background end -->	
+      <!-- background start -->
+      <div id="background"></div>
+      <!-- background end -->  
 
-	<!-- footer start -->
-	<div class="footer" style="opacity: 1;">
-	{% comment %}
-			<ul class="social">
-      </ul>
-				
-		<div class="copyright">
-						<p>Thanks to Eman El-Koshairy, Ramy Wafa, Mohamed Khamis, Ahmed Abousafy, Mohamed Tarek 'T', & Karim Tarek</p>
-					</div>
-	{% endcomment %}
-	</div>
-	<!-- footer end -->
-</div>
-<div id="supersized-loader"></div>
-<ul id="supersized"></ul>
-</body>
+      <!-- footer start -->
+      <div class="footer" style="opacity: 1;">
+        <ul class="social">
+        </ul>
+            
+        <div class="copyright">
+          <p>Thanks to Eman El-Koshairy, Ramy Wafa, Mohamed Khamis, Ahmed Abousafy, Mohamed Tarek 'T', & Karim Tarek</p>
+        </div>
+      </div>
+      <!-- footer end -->
+    </div>
+    <div id="supersized-loader"></div>
+    <ul id="supersized"></ul>
+  </body>
 </html>

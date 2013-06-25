@@ -14,12 +14,12 @@
 {% endblock js %}
 {% block css %}
   <style>
-    #complete-quote-content p {
+    #complete-quote-content .quote-content {
       font-family : 'Crafty Girls';
       font-size   : 16px;
       text-shadow : 0px 0px 0px #aaa;
       margin      : 10px 10px 10px 10px;
-      direction   : auto;
+      background-color:rgba(100,100,100,0.1)
     }
     #complete-quote-content span{
       text-shadow : 4px 4px 4px #aaa;
@@ -63,14 +63,15 @@
     <div class="loading" style="">
       <img src="{{STATIC_URL}}imgs/loading.gif" alt="Loading">
     </div>
-    <center><p class="quote-content"></p><center>
-    <center><span class="date"></span><center>
+    <center><p class="quote-content"></p></center>
+    <br />
+    <center><span class="date"></span></center>
   </div>
   <script>
     var currentQuoteRequest;
     var opacityTimer;
     function templateTheQuoetContent(data) {
-      $("#complete-quote-content").find('p').text(data.quote_content);
+      $("#complete-quote-content").find('.quote-content').text(data.quote_content);
       if(/^[\x00-\xFF]{2}/.test(data.quote_content)) {
         $("#complete-quote-content").find('p').css({
           direction: "ltr"
@@ -126,7 +127,6 @@
       $("#complete-quote-content div.loading").fadeIn();
       getQuoteContent(self.attr("id"));
     });
-    
     $("#complete-quote-content").hover(function(){
       var self = $(this);
       self.animate({opacity: 1}, {duration: 500, queue: false});
