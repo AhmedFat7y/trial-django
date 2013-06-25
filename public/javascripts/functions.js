@@ -363,8 +363,9 @@ function blog() {
             }
             var height = $(window).height();
             var galleryHeight = jQuery('.nav.blog .navMask .navContent').height();
-            if (galleryHeight > height && (e.which == upCode || e.which == downCode)) {
-              var totalNumberOfQuotes = $('.nav.blog .navMask .navContent li').length;
+          var totalNumberOfQuotes = $('.nav.blog .navMask .navContent li').length;  
+          if (galleryHeight > height && (e.which == upCode || e.which == downCode)) {
+              
               var heightOfOneQuote = 35;
               var numberOfVisibleQuotes = height / heightOfOneQuote;
               var amountOfOneAnimation = - heightOfOneQuote;
@@ -392,7 +393,9 @@ function blog() {
               if (totalNumberOfQuotes - (numberOfDownPresses + Math.floor(numberOfVisibleQuotes)) < 5) {
                   tryLoadNewQuotes();
               }
-            }
+             } else if (totalNumberOfQuotes >= 20) {
+                 tryLoadNewQuotes();
+             }
                 
 		});
 	}
@@ -559,6 +562,8 @@ function portfolio() {
               if (totalNumberOfImages - (numberOfDownPresses + Math.floor(numberOfVisibleImages)) < 5) {
                   tryLoadNewImages();
               }
+            } else if (totalNumberOfImages >= 20) {
+                tryLoadNewImages();
             }
                 
 		});
