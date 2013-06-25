@@ -11,7 +11,7 @@ from django.contrib import auth
 from django.core.urlresolvers import reverse
 import MemoryRepository
 import QuoteRepository
-from mainapp.Settings import LOCK_SITE
+from settings import LOCK_SITE
 
 def if_logged_in(user):
   return not LOCK_SITE or user.is_authenticated()
