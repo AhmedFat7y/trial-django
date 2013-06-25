@@ -11,19 +11,21 @@ from django.contrib import auth
 from django.core.urlresolvers import reverse
 import MemoryRepository
 import QuoteRepository
+from mainapp.Settings import LOCK_SITE
 
+def if_logged_in(user):
+  return not LOCK_SITE or user.is_authenticated()
+
+@user_passes_test(if_logged_in)
 def index(request):
-  if not request.user.is_authenticated():
-    return HttpResponseForbidden()
   images_count = MemoryRepository.all().count()
   data = {
     'images_count' : images_count
   }
   return render_to_response("mainapp/main_pages/index.html", data, context_instance=RequestContext(request))
-  
+
+@user_passes_test(if_logged_in)
 def memories(request, memories_group):
-  if not request.user.is_authenticated():
-    return HttpResponseForbidden()
   memories = MemoryRepository.get_memories_group(memories_group)[:20]
   data = {
     'all_memories'    : memories,
@@ -32,9 +34,8 @@ def memories(request, memories_group):
   }
   return render_to_response("mainapp/main_pages/memories.html", data, context_instance=RequestContext(request))
 
+@user_passes_test(if_logged_in)
 def quotes(request):
-  if not request.user.is_authenticated():
-    return HttpResponseForbidden()
   quotes = QuoteRepository.all()[:20]
   images_count = MemoryRepository.all().count()
   data = {
@@ -44,9 +45,8 @@ def quotes(request):
   }
   return render_to_response("mainapp/main_pages/quotes.html", data, context_instance=RequestContext(request))
 
+@user_passes_test(if_logged_in)
 def quote(request, quote_id):
-  if not request.user.is_authenticated():
-    return HttpResponseForbidden()
   quote = QuoteRepository.find(quote_id)
   if not quote:
     return HttpResponseBadRequest
@@ -56,9 +56,8 @@ def quote(request, quote_id):
   }
   return HttpResponse(simplejson.dumps(dict_to_be_dumped), mimetype='application/json')
 
+@user_passes_test(if_logged_in)
 def get_new_memories(request, memories_group):
-  if not request.user.is_authenticated():
-    return HttpResponseForbidden()
   try :
     totalImages = request.GET['totalImages']
     totalImages = int(totalImages)
@@ -74,9 +73,8 @@ def get_new_memories(request, memories_group):
     i+=1
   return HttpResponse(simplejson.dumps(dict_to_be_dumped), mimetype='application/json')
   
+@user_passes_test(if_logged_in)
 def check_for_new_memories(request, memories_group):
-  if not request.user.is_authenticated():
-    return HttpResponseForbidden()
   try :
     totalImages = request.GET['totalImages']
     totalImages = int(totalImages)
@@ -85,9 +83,8 @@ def check_for_new_memories(request, memories_group):
   memories_count = MemoryRepository.get_memories_group(memories_group)[totalImages : totalImages + 10].count()
   return HttpResponse(memories_count, mimetype='application/text')
 
+@user_passes_test(if_logged_in)
 def get_new_quotes(request):
-  if not request.user.is_authenticated():
-    return HttpResponseForbidden()
   try :
     totalQuotes = request.GET['totalQuotes']
     totalQuotes = int(totalQuotes)
@@ -104,9 +101,8 @@ def get_new_quotes(request):
     i+=1
   return HttpResponse(simplejson.dumps(dict_to_be_dumped), mimetype='application/json')
   
+@user_passes_test(if_logged_in)
 def check_for_new_quotes(request):
-  if not request.user.is_authenticated():
-    return HttpResponseForbidden()
   try :
     totalQuotes = request.GET['totalQuotes']
     totalQuotes = int(totalQuotes)
