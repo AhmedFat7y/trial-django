@@ -16,6 +16,7 @@ from settings import LOCK_SITE
 def if_logged_in(user):
   return not LOCK_SITE or user.is_authenticated()
 
+
 @user_passes_test(if_logged_in)
 def index(request):
   images_count = MemoryRepository.all().count()
@@ -23,6 +24,13 @@ def index(request):
     'images_count' : images_count
   }
   return render_to_response("mainapp/main_pages/index.html", data, context_instance=RequestContext(request))
+@user_passes_test(if_logged_in)
+def about(request):
+  images_count = MemoryRepository.all().count()
+  data = {
+    'images_count' : images_count
+  }
+  render_to_response("mainapp/main_pages/about.html", data, context_instance=RequestContext(request))
 
 @user_passes_test(if_logged_in)
 def memories(request, memories_group):

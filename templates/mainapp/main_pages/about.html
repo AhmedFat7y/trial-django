@@ -1,0 +1,7 @@
+{% extends 'mainapp/main_layout.html' %}
+
+{% block title %}About{% endblock title %}
+
+{% block content %}
+  {% include 'mainapp/tags/slideshow.html' with images_count=images_count MEDIA_URL=MEDIA_URL %}
+{% endblock content %}

@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('mainapp.views',
     # Examples:
     url(r'^/?$', 'index', name='home'),
+    #url(r'^about/?$', 'about', name='about'),
     
     url(r'^memories/(?P<memories_group>SE-\d{4})/?$', 'memories', name='memories'),
     url(r'^memories/(?P<memories_group>SE-\d{4})/check-for-new/?$', 'check_for_new_memories', name='check_for_new_memories'),
