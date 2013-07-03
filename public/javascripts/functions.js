@@ -288,17 +288,15 @@ function templateNewQuotes(jsonObj) {
 function loadNewQuotes() {
     var urlJSON = getNewQuotesURL;
     var dataJSON = {
-        totalQuotes: $('.nav.blog .navMask .navContent li').length,
+        totalQuotes: $('.nav.blog .navMask .navContent li').length
     };
     
     var requestJSON = $.ajax({
         url: urlJSON,
-        data: dataJSON,
-        
+        data: dataJSON
     })
     .done(function(data, textStatus, jqXHR) {
       templateNewQuotes(data);
-      $('#progress-quote').fadeOut();
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
     })
@@ -310,20 +308,20 @@ function loadNewQuotes() {
 function checkForNewQuotes() {
     var urlGET = checkForNewQuotesURL;
     var dataGET = {
-        totalQuotes: $('.nav.blog .navMask .navContent li').length,
+        totalQuotes: $('.nav.blog .navMask .navContent li').length
     };
     
     var requestGET = $.ajax({
         url: urlGET,
-        data: dataGET,
+        data: dataGET
     })
     .done(function(data, textStatus, jqXHR) {
         if (parseInt(data) > 0) {
           $('#progress-quote').fadeIn();
           loadNewQuotes();
-        } else {
+        }/* else {
           $('#progress-quote').fadeOut();
-        }
+        }*/
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
         $('#progress-quote').fadeOut();
@@ -452,12 +450,12 @@ function templateNewImages(jsonObj) {
 function loadNewImages() {
     var urlJSON = getNewMemoriesURL;
     var dataJSON = {
-        totalImages: $('.image').length,
+        totalImages: $('.image').length
     };
     
     var requestJSON = $.ajax({
         url: urlJSON,
-        data: dataJSON,
+        data: dataJSON
         
     })
     .done(function(data, textStatus, jqXHR) {
@@ -474,12 +472,12 @@ function loadNewImages() {
 function checkForNewImages() {
     var urlGET = checkForNewMemoriesURL;
     var dataGET = {
-        totalImages: $('.image').length,
+        totalImages: $('.image').length
     };
     
     var requestGET = $.ajax({
         url: urlGET,
-        data: dataGET,
+        data: dataGET
     })
     .done(function(data, textStatus, jqXHR) {
         if (parseInt(data) > 0) {

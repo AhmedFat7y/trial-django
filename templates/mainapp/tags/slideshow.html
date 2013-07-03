@@ -1,35 +1,15 @@
-  <!-- background start -->
+{% block js %}
+  <script type="text/javascript">
+    var enableSlideShow = true;
+    var MEDIA_URL = '{{MEDIA_URL}}';
+    var image_count = {{images_count}};
+  </script>
+{% endblock js %}
+<!-- background start -->
   <div id="background">
-    <script type="text/javascript">
-      jQuery(function($){
-        var slides = [];
-        var maxImages = {{images_count}};
-        var upperlimit = 100;
-        if(maxImages > 100) {
-          for(; maxImages > upperlimit; upperlimit *= 10){}
-        }
-        for (var i = 0; i < 100; i++) {
-          var imageIndex = (Math.floor(Math.random() * upperlimit)) % maxImages;
-          slides[i] = {image : '{{MEDIA_URL}}memories-images/' + imageIndex + '.JPEG'}
-        }
-        
-        $.supersized({
-          slide_interval		: 10000,
-          transition			  : 1,
-          transition_speed	: 750,
-          slide_links			  : 'blank',
-          slides 				    : slides,
-          random            : true
-        });
-      });
-    </script>
-
     <div id="progress-back" class="load-item" style="display: block;">
       <div id="progress-bar"></div>
     </div>
-
-
     <div class="pattern pattern-03">&nbsp;</div>
-
   </div>
   <!-- background end -->	

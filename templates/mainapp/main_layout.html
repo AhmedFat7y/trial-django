@@ -1,40 +1,61 @@
 {% load url from future %}
 <!DOCTYPE html>
 <html>
-  <meta name="author" content="Pure Layers">
-  <meta name="keywords" content="Dr. Fatma, Tribute, Gift, Memory">
-  <meta name="robots" content="all">
-  <title>{% block title %}Default Title{%endblock title%}</title>
+  <head>
+    <meta name="author" content="Pure Layers">
+    <meta name="keywords" content="Dr. Fatma, Tribute, Gift, Memory">
+    <meta name="robots" content="all">
+    <title>{% block title %}Home{%endblock title%}</title>
 
-  <style type="text/css" id="custom-background-css">
-    body.custom-background { background-color: #505050; }
-  </style>
-  <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style.css">
-  <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/shortcodes.css">
-  <!--[if IE 7]><link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style-IE7.css" /><![endif]-->
-  <!--[if IE 9]><link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style-IE9.css" /><![endif]-->
-  {% block css %}
-  {% endblock css %}
-  <!------------------------------------------------------------------>
-  {% block js %}
-  {% endblock js %}
-  {% comment %} <script type="text/javascript" async="" src="{{STATIC_URL}}scripts/ga.js"></script> {% endcomment %}
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-1.7.1.min.js"></script>
-  <style type="text/css"></style>
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-ui-1.8.14.custom.min.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.nivo.slider.pack.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.prettyPhoto.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.tipsy.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/shortcodes.js"></script>
-  
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.easing.min.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/supersized.3.2.7.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/supersized.shutter.js"></script>
-  
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.inputs.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/swfobject.js"></script>
-  <script type="text/javascript" src="{{STATIC_URL}}scripts/functions.js"></script>
-</head>
+    <style type="text/css" id="custom-background-css">
+      body.custom-background { background-color: #505050; }
+    </style>
+    <link href='http://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet' type='text/css'>
+    {% if not DEBUG %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/nivo-slider.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/prettyPhoto.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/shortcodes.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/reset.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/clear.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/supersized.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/supersized.shutter.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style2.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style.css"/>
+    {% else %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/big.file-1.css"/>
+    {% endif %}
+    <!--[if IE 7]><link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL }}css/style-IE7.css" /><![endif]-->
+    <!--[if IE 9]><link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style-IE9.css" /><![endif]-->
+    
+    {% block css %}
+    {% endblock css %}
+    <!------------------------------------------------------------------>
+    {% if DEBUG %}
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery-ui-1.8.14.custom.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.tipsy.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/shortcodes.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/supersized.3.2.7.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/supersized.shutter.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/jquery.inputs.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/swfobject.js"></script>
+    {% else %}
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/big.file-1.js"></script>
+    {% endif %}
+    
+    {% block js %}
+    {% endblock js %}
+    
+    {% if not DEBUG %}
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/functions.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/collected-script.js"></script>
+    {% else %}
+    <script type="text/javascript" src="{{STATIC_URL}}scripts/big.file-2.js"></script>
+    {% endif %}
+  </head>
 
   <body class="archive category category-portfolio category-4 custom-background">
 
@@ -91,59 +112,12 @@
       {% block content %}
       {% endblock content %}
 
-
-
-      <script type="text/javascript">
-        $(document).ready(function() {
-          //cool this, right?
-          setTimeout(function(){
-            $('.nav.portfolio .navMask ul.navContent').animate({right: '-200px'}, {queue:false, duration: 500});
-            $('.navigation, .footer').animate({opacity: '0.1'}, {queue:false, duration: 500});
-          }, 1000);
-          
-          $('.nav.portfolio .navMask ul.navContent, .navigation, .footer').hover(function() {
-            $('.nav.portfolio .navMask ul.navContent').animate({right: '0px'}, {queue:false, duration: 500});
-            $('.navigation, .footer').animate({opacity: '1'}, {queue:false, duration: 500});
-          },
-          function(){
-            $('.nav.portfolio .navMask ul.navContent').animate({right: '-200px'}, {queue:false, duration: 500});
-            $('.navigation, .footer').animate({opacity: '0.1'}, {queue:false, duration: 500});
-          });
-          $('.nav.portfolio .navMask ul.navContent li p.more a').click(function(){
-              $(this).parent().parent().find('p.image a').click();
-          });
-          $('.nav.portfolio .navMask ul.navContent li p.image a').not('#progress-img').click(function(e) {
-            $('.loading').fadeIn();
-            var htmlUrl = '<img src="' + $(this).find('img').attr("alt") + '" alt="" class="background" />';
-            $('#background').html(htmlUrl);
-            $('#background img').load(function() {
-              background_resize();
-              $(this).fadeIn();
-              $('.loading').fadeOut();
-            });
-          });
-          $('.loading').fadeOut();
-        });
-      </script>
-        
-
-      <!-- loading start -->
-      <div class="loading" style="display: none;">
-        <img src="{{STATIC_URL}}imgs/loading.gif" alt="Loading">
-      </div>
-      <!-- loading end -->
-
-      <!-- background start -->
-      <div id="background"></div>
-      <!-- background end -->  
-
       <!-- footer start -->
       <div class="footer" style="opacity: 1;">
         <ul class="social">
         </ul>
-            
         <div class="copyright">
-          <p>Thanks to Eman El-Koshairy, Ramy Wafa, Mohamed Khamis, Ahmed Abousafy, Mohamed Tarek 'T', & Karim Tarek</p>
+          <p>Thanks to Eman El-Koshairy, Ramy Wafa, Mohamed Khamis, Ahmed Abousafy, Mohamed Tarek 'T', Karim Tarek, & Special thanks to Hadeer Younis</p>
         </div>
       </div>
       <!-- footer end -->
