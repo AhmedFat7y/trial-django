@@ -39,7 +39,7 @@
           {% for quote in all_quotes%}
             <li>
               <a id="quote-{{quote.id}}" href="#" style="">
-                {{quote.content|slice:":30"|add:". . ."}}
+                {{quote.content|add:". . ."}}
                 <span>Name: {{quote.owner_name}}</span>
               </a>
             </li>
@@ -60,6 +60,7 @@
     <div class="loading" style="">
       <img src="{{STATIC_URL}}imgs/loading.gif" alt="Loading">
     </div>
+    <input type="hidden" value="0" />
     <center><p class="quote-content"></p></center>
     <br />
     <center><span class="date"></span></center>

@@ -45,6 +45,11 @@ def memories(request, memories_group):
 @user_passes_test(if_logged_in)
 def quotes(request):
   quotes = QuoteRepository.all()[:20]
+  for quote in quotes:
+    if len(quote.owner_name) > 30:
+      quote.owner_name = ' '.join(quote.owner_name.split(' ')[:2]) + ' ...'
+    quote.content = quote.content[:60 - len(quote.owner_name)]
+    
   images_count = MemoryRepository.all().count()
   data = {
     'all_quotes': quotes,
@@ -61,6 +66,7 @@ def quote(request, quote_id):
   dict_to_be_dumped = {
     'owner_name': quote.owner_name,
     'quote_content': quote.content,
+    'id': quote.id,
   }
   return HttpResponse(simplejson.dumps(dict_to_be_dumped), mimetype='application/json')
 
@@ -102,8 +108,11 @@ def get_new_quotes(request):
   dict_to_be_dumped = {}
   i = 0
   for quote in quotes:
-    dict_to_be_dumped['%s_content' % i] = quote.content[:30]
+    if len(quote.owner_name) > 30:
+      quote.owner_name = ' '.join(quote.owner_name.split(' ')[:2]) + ' ...'
+    dict_to_be_dumped['%s_content' % i] = quote.content[:60 - len(quote.owner_name)]
     dict_to_be_dumped['%s_owner_name' % i] = quote.owner_name
+    dict_to_be_dumped['%s_id' % i] = quote.id
     #dict_to_be_dumped['%s_owner_image' % i] = quote.owner_image.url
     #dict_to_be_dumped['%s_related_image' % i] = quote.quote_related_image.url
     i+=1

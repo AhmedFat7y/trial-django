@@ -264,16 +264,85 @@ function image() {
 	BLOG
 **************************************************/
 var loadingQuotesMutex = false;
+var opacityTimer;
+function templateTheQuoetContent(data) {
+  $("#complete-quote-content").find('.quote-content').text(data.quote_content);
+  if(/^[\x00-\xFF]{2}/.test(data.quote_content)) {
+    $("#complete-quote-content").find('p').css({
+      direction: "ltr"
+    });
+  } else {
+    $("#complete-quote-content").find('p').css({
+      direction: "rtl"
+    });      
+  }
+  $("#complete-quote-content").find('input').val(data.id);
+  $("#complete-quote-content").find('span').text(data.owner_name);
+}
+function getQuoteContent(quoteID) {
+ if (currentQuoteRequest) {
+  currentQuoteRequest.abort();
+ }
+ quoteID = quoteID.split('-')[1];
+  currentQuoteRequest = $.ajax({
+    url: getQuoteContentURL.slice(0, getQuoteContentURL.length - 1) + quoteID,
+    data: {}
+  })
+  .done(function(data, textStatus, jqXHR) {
+    templateTheQuoetContent(data);
+  })
+  .fail(function(jqXHR, textStatus, errorThrown) {
+    $("#complete-quote-content").fadeOut();
+  })
+  .always(function (jqXHR, textStatus, errorThrown) {
+    $("#complete-quote-content div.loading").fadeOut();
+  });
+}
+function loadQuote(item) {
+  if(!item.attr) {
+    var self = $(item);
+  } else {
+    var self = item;
+  }
+  var quoteDiv = $('#complete-quote-content');
+  if( $("#complete-quote-content").find('input').val() == self.attr("id").split('-')[1]) 
+  {
+    quoteDiv.fadeOut();
+    return;
+  }
+  var startright = 0;
+  $.each($('.nav.blog .navMask .navContent li a'), function(){
+    var self = $(this);
+    if(self.width() > startright) {
+      startright = self.width()
+    }
+  });
+  var startleft = $('#menu-main-menu>li').width();
+  var freewidth = $(window).width() - (startright + startleft);
+  $('#complete-quote-content').css({
+      left     : startleft + 10,
+      width    : freewidth - 40,
+      top      : $(window).height() / 4,
+      opacity  : 1,
+      position : 'absolute'
+  });
+  opacityTimer = setTimeout("$('#complete-quote-content').animate({opacity: 0.5}, {duration: 500, queue: false})", 3000);
+  $('#complete-quote-content').fadeOut(10, 'linear').fadeIn();
+  $("#complete-quote-content div.loading").fadeIn();
+  
+  getQuoteContent(self.attr("id"));
+}
 function templateNewQuotes(jsonObj) {
   for(i = 0; jsonObj[i + '_content']; i++) {
     var newItem = '<li>\n'
-			+ '<a href="#">'
+			+ '<a href="#" id="quote-' + jsonObj[i + '_id'] + '">'
 			+ jsonObj[i + '_content']
 			+ '<span class="date">Name: '  + jsonObj[i + '_owner_name'] + '</span>\n'
       + '</a>\n'
       + '</li>\n';
     newItem = $(newItem);
     // to show arrow on hover
+    newItem.find('a').click(function(){loadQuote(this);});
     newItem.find('a').hover(function() {
 			jQuery(this).animate({paddingRight: '20px'}, {queue:false, duration: 200});
 		},
@@ -338,8 +407,26 @@ function tryLoadNewQuotes() {
 }
 function blog() {
 	
-	if (!(jQuery('body').is('.mobile'))) {
-		
+  if (!(jQuery('body').is('.mobile'))) {
+    $('.nav.blog .navMask .navContent li a').click(function(){
+      loadQuote(this);
+    });
+    $("#complete-quote-content").hover(function(){
+      var self = $(this);
+      self.animate({opacity: 1}, {duration: 500, queue: false});
+      if(opacityTimer) {
+        clearTimeout(opacityTimer);
+        opacityTimer = 0;
+      }
+    },
+    function(){
+      var self = $(this);
+      self.animate({opacity: 0.5}, {duration: 500, queue: false});
+      if(opacityTimer) {
+        clearTimeout(opacityTimer);
+        opacityTimer = 0;
+      }
+    });
 		jQuery('.nav.blog .navContent li a').hover(function() {
 			jQuery(this).animate({paddingRight: '20px'}, {queue:false, duration: 200});
 		},
