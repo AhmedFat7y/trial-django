@@ -411,22 +411,6 @@ function blog() {
     $('.nav.blog .navMask .navContent li a').click(function(){
       loadQuote(this);
     });
-    $("#complete-quote-content").hover(function(){
-      var self = $(this);
-      self.animate({opacity: 1}, {duration: 500, queue: false});
-      if(opacityTimer) {
-        clearTimeout(opacityTimer);
-        opacityTimer = 0;
-      }
-    },
-    function(){
-      var self = $(this);
-      self.animate({opacity: 0.5}, {duration: 500, queue: false});
-      if(opacityTimer) {
-        clearTimeout(opacityTimer);
-        opacityTimer = 0;
-      }
-    });
 		jQuery('.nav.blog .navContent li a').hover(function() {
 			jQuery(this).animate({paddingRight: '20px'}, {queue:false, duration: 200});
 		},
